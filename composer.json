@@ -5,7 +5,7 @@
     "pimcore",
     "google translation"
   ],
-  "type": "symfony-bundle",
+  "type": "pimcore-bundle",
   "license": "MIT",
   "authors": [
     {
