@@ -20,7 +20,7 @@ pimcore.object.elementservice.addCopyButton = function (id, fieldName, component
         tooltip: t("copy_from_source_lang"),
         handler: function () {
             Ext.Ajax.request({
-                url: "/admin/product/get-field-data",
+                url: "/admin/object/get-field-data",
                 method: "GET",
                 params: {
                     sourceId: id,
@@ -54,7 +54,7 @@ pimcore.object.elementservice.translateButton = function (id, fieldName, compone
         tooltip: t("translate_field"),
         handler: function () {
             Ext.Ajax.request({
-                url: "/admin/product/translate-field",
+                url: "/admin/object/translate-field",
                 method: "GET",
                 params: {
                     sourceId: id,

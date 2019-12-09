@@ -1,6 +1,6 @@
 <?php
 
-namespace Divante\GoogleTranslationBundle\DependencyInjection;
+namespace GoogleTranslationBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

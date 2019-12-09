@@ -4,36 +4,36 @@
  * @author      Łukasz Marszałek <lmarszalek@divante.co>
  * @copyright   Copyright (c) 2019 Divante Ltd. (https://divante.co)
  */
-namespace Divante\GoogleTranslationBundle\Controller;
+namespace GoogleTranslationBundle\Controller;
 
 use Pimcore\Bundle\AdminBundle\Controller\AdminController as BackendAdminController;
 
 use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
 use Pimcore\Model\DataObject;
-use Pimcore\Model\DataObject\LampenWeltProduct;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class AdminController
- * @package Divante\GoogleTranslationBundle\Controller
+ * @Route("/admin/object")
+ * @package GoogleTranslationBundle\Controller
  */
 class AdminController extends BackendAdminController
 {
 
     /**
-     * @Route("/admin/product/translate-field")
+     * @Route("/translate-field")
      * @param Request $request
      *
      * @return \Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse
      */
     public function translateFieldAction(Request $request)
     {
-        $product = DataObject::getById($request->get('sourceId'));
-        if (!$product) {
+        $object = DataObject::getById($request->get('sourceId'));
+        if (!$object instanceof DataObject) {
             return $this->adminJson([
                 'success' => false,
-                'message' => 'product doesnt exist',
+                'message' => 'Object doesnt exist',
             ]);
         }
 
@@ -42,7 +42,7 @@ class AdminController extends BackendAdminController
 
         $fieldName = 'get' . ucfirst($request->get('fieldName'));
 
-        $data = $product->$fieldName($lang) ? $product->$fieldName($lang) : $product->$fieldName($sourceLang);
+        $data = $object->$fieldName($lang) ?? $object->$fieldName($sourceLang);
 
         if (!$data) {
             return $this->adminJson([
@@ -75,7 +75,7 @@ class AdminController extends BackendAdminController
                 $data = $decodeData;
             }
 
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,
                 'message' => 'Field not found',
@@ -90,7 +90,7 @@ class AdminController extends BackendAdminController
 
 
     /**
-     * @Route("/admin/product/get-field-data")
+     * @Route("/get-field-data")
      *
      * @param Request $request
      *
@@ -98,11 +98,11 @@ class AdminController extends BackendAdminController
      */
     public function getFieldDataFromMasterAction(Request $request): JsonResponse
     {
-        $product = LampenWeltProduct::getById($request->get('sourceId'));
-        if (!$product) {
+        $object = DataObject::getById($request->get('sourceId'));
+        if (!$object instanceof DataObject) {
             return $this->adminJson([
                 'success' => false,
-                'message' => 'product doesnt exist',
+                'message' => 'Object doesnt exist',
             ]);
         }
         $sourceLang = $this->container->getParameter('divante_google_translation.source_lang');
@@ -111,8 +111,8 @@ class AdminController extends BackendAdminController
 
         try {
 
-            $data = $product->$fieldName($sourceLang);
-        } catch (\Exception $exception) {
+            $data = $object->$fieldName($sourceLang);
+        } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,
                 'message' => 'Field not found',

@@ -1,3 +1,0 @@
-divante_google_translation_homepage:
-    path:     /divante_google_translation
-    defaults: { _controller: DivanteGoogleTranslationBundle:Default:index }

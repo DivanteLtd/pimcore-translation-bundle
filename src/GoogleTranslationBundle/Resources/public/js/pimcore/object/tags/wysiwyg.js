@@ -15,7 +15,6 @@ pimcore.registerNS("pimcore.object.tags.wysiwyg");
 pimcore.object.tags.wysiwyg = Class.create(pimcore.object.tags.wysiwyg, {
 
     getLayoutEdit: function () {
-        var $this = this;
         var width = '600';
 
         this.getLayout();
@@ -26,13 +25,13 @@ pimcore.object.tags.wysiwyg = Class.create(pimcore.object.tags.wysiwyg, {
                 this.ckeditor = null;
             }
         }.bind(this));
-        if ($this.context.language) {
+        if (this.context.language) {
             this.copyButton = new pimcore.object.elementservice.addCopyButton(
                 this.object.data.general.o_id,
                 this.fieldConfig.name,
-                $this,
+                this,
                 'wysiwyg',
-                $this.context.language
+                this.context.language
             );
         }
         else {
@@ -42,19 +41,19 @@ pimcore.object.tags.wysiwyg = Class.create(pimcore.object.tags.wysiwyg, {
             width = this.fieldConfig.width;
         }
 
-        if ($this.context.language) {
+        if (this.context.language) {
             this.translateButton = new pimcore.object.elementservice.translateButton(
                 this.object.data.general.o_id,
                 this.fieldConfig.name,
-                $this,
+                this,
                 'wysiwyg',
-                $this.context.language
+                this.context.language
             );
         } else {
             this.translateButton = {};
         }
 
-        $this.component.width = 550;
+        this.component.width = 550;
 
         return Ext.create('Ext.form.FieldContainer', {
             labelWidth: this.fieldConfig.width,

@@ -1,0 +1,18 @@
+{
+  "name": "DivanteLtd/googletranslation-bundle",
+  "description": "Google Translation Bundle for Pimcore",
+  "keywords": [
+    "pimcore",
+    "google translation"
+  ],
+  "homepage": "https://github.com/prugala/PRRecaptchaBundle",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Łukasz Marszałek",
+      "email": "lmarszalek@divante.pl"
+    }
+  ]
+  }
+}

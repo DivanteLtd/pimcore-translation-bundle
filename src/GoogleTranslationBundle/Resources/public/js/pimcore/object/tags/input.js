@@ -22,8 +22,6 @@ pimcore.object.tags.input = Class.create(pimcore.object.tags.input, {
             labelWidth: 100
         };
 
-        var $this = this;
-
         if (this.data) {
             input.value = this.data;
         }
@@ -80,26 +78,26 @@ pimcore.object.tags.input = Class.create(pimcore.object.tags.input, {
             });
 
         } else {
-            if ($this.context.language) {
+            if (this.context.language) {
                 this.copyButton = new pimcore.object.elementservice.addCopyButton(
                     this.object.data.general.o_id,
                     this.fieldConfig.name,
-                    $this.component,
+                    this.component,
                     'input',
-                    $this.context.language
+                    this.context.language
                 );
             }
             else {
                 this.copyButton = {};
 
             }
-            if ($this.context.language) {
+            if (this.context.language) {
                 this.translateButton = new pimcore.object.elementservice.translateButton(
                     this.object.data.general.o_id,
                     this.fieldConfig.name,
-                    $this.component,
+                    this.component,
                     'input',
-                    $this.context.language
+                    this.context.language
                 );
             } else {
                 this.translateButton = {};

@@ -1,3 +1,0 @@
-app:
-    resource: "@DivanteGoogleTranslationBundle/Controller/"
-    type:     annotation

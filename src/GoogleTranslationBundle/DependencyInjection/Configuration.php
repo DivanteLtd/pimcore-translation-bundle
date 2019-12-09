@@ -1,6 +1,6 @@
 <?php
 
-namespace Divante\GoogleTranslationBundle\DependencyInjection;
+namespace GoogleTranslationBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

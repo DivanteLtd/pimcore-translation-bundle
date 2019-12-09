@@ -1,15 +1,15 @@
 <?php
 
-namespace Divante\GoogleTranslationBundle;
+namespace GoogleTranslationBundle;
 
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 
 /**
- * Class DivanteGoogleTranslationBundle
- * @package Divante\GoogleTranslationBundle
+ * Class GoogleTranslationBundle
+ * @package GoogleTranslationBundle
  *
  */
-class DivanteGoogleTranslationBundle extends AbstractPimcoreBundle
+class GoogleTranslationBundle extends AbstractPimcoreBundle
 {
     /**
      * @return array|\Pimcore\Routing\RouteReferenceInterface[]|string[]

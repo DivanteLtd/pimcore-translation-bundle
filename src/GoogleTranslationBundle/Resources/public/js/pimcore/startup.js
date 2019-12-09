@@ -8,10 +8,6 @@ pimcore.plugin.DivanteGoogleTranslationBundle = Class.create(pimcore.plugin.admi
     initialize: function () {
         pimcore.plugin.broker.registerPlugin(this);
     },
-
-    pimcoreReady: function (params, broker) {
-        // alert("DivanteGoogleTranslationBundle ready!");
-    }
 });
 
 var DivanteGoogleTranslationBundlePlugin = new pimcore.plugin.DivanteGoogleTranslationBundle();
