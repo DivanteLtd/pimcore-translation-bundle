@@ -5,7 +5,6 @@
     "pimcore",
     "google translation"
   ],
-  "homepage": "https://github.com/prugala/PRRecaptchaBundle",
   "type": "symfony-bundle",
   "license": "MIT",
   "authors": [
