@@ -1,5 +1,5 @@
 # GoogleTranslation Bundle
-#####GoogleTranslationBundle for Pimcore
+##### GoogleTranslationBundle for Pimcore
 
 Copy data from the source language and translate it by using Google Translate integration.
 
