@@ -15,3 +15,6 @@ services:
         resource: '../../Controller'
         public: true
         tags: ['controller.service_arguments']
+
+    GoogleTranslationBundle\Service\ConfigurationService:
+        public: true

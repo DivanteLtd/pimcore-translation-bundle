@@ -6,6 +6,7 @@
  */
 namespace GoogleTranslationBundle\Controller;
 
+use GoogleTranslationBundle\Service\ConfigurationService;
 use Pimcore\Bundle\AdminBundle\Controller\AdminController as BackendAdminController;
 
 use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
@@ -20,7 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminController extends BackendAdminController
 {
-
     /**
      * @Route("/translate-field")
      * @param Request $request
@@ -38,11 +38,12 @@ class AdminController extends BackendAdminController
         }
 
         $lang       = $request->get('lang');
-        $sourceLang = $this->container->getParameter('divante_google_translation.source_lang');
+        /** @var ConfigurationService $configuration */
+        $configuration = $this->container->get(ConfigurationService::class);
 
         $fieldName = 'get' . ucfirst($request->get('fieldName'));
 
-        $data = $object->$fieldName($lang) ?? $object->$fieldName($sourceLang);
+        $data = $object->$fieldName($lang) ?? $object->$fieldName($configuration->getSourceLang());
 
         if (!$data) {
             return $this->adminJson([
@@ -52,7 +53,7 @@ class AdminController extends BackendAdminController
         }
 
         try {
-            $apiKey = $this->container->getParameter('divante_google_translation.api_key');
+            $apiKey = $configuration->getApiKey();
             $url    = 'https://www.googleapis.com/language/translate/v2?key=' . $apiKey . '&q=' . rawurlencode($data) . '&source=&target=' . locale_get_primary_language($lang);
 
             $handle = curl_init($url);
@@ -105,13 +106,14 @@ class AdminController extends BackendAdminController
                 'message' => 'Object doesnt exist',
             ]);
         }
-        $sourceLang = $this->container->getParameter('divante_google_translation.source_lang');
+        /** @var ConfigurationService $configuration */
+        $configuration = $this->container->get(ConfigurationService::class);
 
         $fieldName = 'get' . ucfirst($request->get('fieldName'));
 
         try {
 
-            $data = $object->$fieldName($sourceLang);
+            $data = $object->$fieldName($configuration->getSourceLang());
         } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,
