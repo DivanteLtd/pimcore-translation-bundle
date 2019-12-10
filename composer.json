@@ -1,9 +1,9 @@
 {
-  "name": "DivanteLtd/googletranslation-bundle",
-  "description": "Google Translation Bundle for Pimcore",
+  "name": "DivanteLtd/pimcore-google-translate",
+  "description": "Pimcore Google Translate Bundle",
   "keywords": [
     "pimcore",
-    "google translation"
+    "google translate"
   ],
   "type": "pimcore-bundle",
   "license": "MIT",

@@ -1,5 +1,5 @@
-# GoogleTranslation Bundle
-#####GoogleTranslationBundle for Pimcore
+# GoogleTranslate Bundle
+##### GoogleTranslateBundle for Pimcore
 
 Copy data from the source language and translate it by using Google Translate integration.
 
@@ -7,15 +7,15 @@ Supports input and wysiwyg.
 
 
 #### Instalation
-`composer require divanteltd/googletranslation-bundle`
+`composer require divanteltd/pimcore-google-translate`
 
 Register bundle in `AppKernel.php` file:
 
-```new GoogleTranslationBundle\GoogleTranslationBundle()```
+```new GoogleTranslateBundle\GoogleTranslateBundle()```
 
 #### Configuration
 ```
-divante_google_translation:
+divante_google_translate:
     api_key: 
     source_lang:
 ```
