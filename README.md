@@ -7,7 +7,7 @@ Supports input and wysiwyg.
 
 
 #### Instalation
-`composer require divanteltd/pimcore-google-translate`
+`composer require divante-ltd/pimcore-google-translate`
 
 Register bundle in `AppKernel.php` file:
 
