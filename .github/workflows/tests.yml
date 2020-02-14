@@ -1,0 +1,59 @@
+name: Tests
+on: [push]
+
+jobs:
+  build:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: pimcore_test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Setup DB
+        run: |
+          mysql --version
+          mysql -u root -proot -e "SET GLOBAL innodb_file_format=Barracuda;"
+          mysql -u root -proot -e "SET GLOBAL innodb_large_prefix=1;"
+
+      - name: PHP Runner
+        uses: nanasess/setup-php@master
+        with:
+          php-version: '7.3'
+
+      - name: Checkout Repository
+        uses: actions/checkout@v1
+
+      - name: Install Project
+        env:
+          DB_HOST: "localhost"
+          DB_PORT: "3306"
+          DB_USERNAME: "root"
+          DB_PASSWORD: "root"
+          DB_DATABASE: "pimcore_test"
+          PIMCORE_ENVIRONMENT: "test"
+          PIMCORE_TEST: "1"
+          PIMCORE_TEST_DB_DSN: "mysql://root:root@localhost/pimcore_test"
+        run: |
+          ./scripts/install.sh
+
+      - name: Unit Tests
+        env:
+          PIMCORE_TEST_DB_DSN: "mysql://root:root@localhost/pimcore_test"
+        run: |
+          cd tmp
+          ./vendor/bin/phpunit --coverage-text
+
+      - name: Functional Tests
+        env:
+          PIMCORE_TEST_DB_DSN: "mysql://root:root@localhost/pimcore_test"
+        run: |
+          cd tmp
+          ./vendor/bin/codecept run -c tests/codeception.dist.yml

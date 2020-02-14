@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-       if (method_exists(TreeBuilder::class, 'getRootNode')) {
+        if (method_exists(TreeBuilder::class, 'getRootNode')) {
             $treeBuilder = new TreeBuilder('divante_google_translate');
             $rootNode = $treeBuilder->getRootNode();
         } else {
