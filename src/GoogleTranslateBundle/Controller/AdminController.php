@@ -4,6 +4,7 @@
  * @author      Łukasz Marszałek <lmarszalek@divante.co>
  * @copyright   Copyright (c) 2019 Divante Ltd. (https://divante.co)
  */
+
 namespace GoogleTranslateBundle\Controller;
 
 use GoogleTranslateBundle\Service\ConfigurationService;
@@ -37,7 +38,7 @@ class AdminController extends BackendAdminController
             ]);
         }
 
-        $lang       = $request->get('lang');
+        $lang = $request->get('lang');
         /** @var ConfigurationService $configuration */
         $configuration = $this->container->get(ConfigurationService::class);
 
@@ -54,7 +55,9 @@ class AdminController extends BackendAdminController
 
         try {
             $apiKey = $configuration->getApiKey();
-            $url    = 'https://www.googleapis.com/language/translate/v2?key=' . $apiKey . '&q=' . rawurlencode($data) . '&source=&target=' . locale_get_primary_language($lang);
+            $url = 'https://www.googleapis.com/language/translate/v2?key=' . $apiKey .
+                '&q=' . rawurlencode($data) .
+                '&source=&target=' . locale_get_primary_language($lang);
 
             $handle = curl_init($url);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
@@ -62,7 +65,7 @@ class AdminController extends BackendAdminController
 
             $responseDecoded = json_decode($response, true);
 
-            if($responseDecoded['error']){
+            if ($responseDecoded['error']) {
                 return $this->adminJson([
                     'success' => false,
                     'message' => $responseDecoded['error']['message'],
@@ -85,7 +88,7 @@ class AdminController extends BackendAdminController
 
         return $this->adminJson([
             'success' => true,
-            'data'    => $data,
+            'data' => $data,
         ]);
     }
 
@@ -123,7 +126,7 @@ class AdminController extends BackendAdminController
 
         return $this->adminJson([
             'success' => true,
-            'data'    => $data,
+            'data' => $data,
         ]);
     }
 }
