@@ -78,7 +78,6 @@ class AdminController extends BackendAdminController
             if ($decodeData) {
                 $data = $decodeData;
             }
-
         } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,
@@ -91,7 +90,6 @@ class AdminController extends BackendAdminController
             'data' => $data,
         ]);
     }
-
 
     /**
      * @Route("/get-field-data")
@@ -115,7 +113,6 @@ class AdminController extends BackendAdminController
         $fieldName = 'get' . ucfirst($request->get('fieldName'));
 
         try {
-
             $data = $object->$fieldName($configuration->getSourceLang());
         } catch (\Throwable $exception) {
             return $this->adminJson([
