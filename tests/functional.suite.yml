@@ -1,0 +1,10 @@
+actor: FunctionalTester
+
+modules:
+    enabled:
+        - \Tests\Helper\Functional
+        - \Pimcore\Tests\Helper\Pimcore:
+              connect_db: true
+              initialize_db: true
+              purge_class_directory: true
+              setup_objects: false
