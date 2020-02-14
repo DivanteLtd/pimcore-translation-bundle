@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\DivanteLtd\AdvancedSearchBundle\Service;
+namespace Tests\Unit\GoogleTranslateBundle\Service;
 
 use PHPUnit\Framework\TestCase;
 

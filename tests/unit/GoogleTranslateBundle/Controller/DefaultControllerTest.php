@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\DivanteLtd\AdvancedSearchBundle\Controller;
+namespace Tests\Unit\GoogleTranslateBundle\Controller;
 
 use Pimcore\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
