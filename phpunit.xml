@@ -12,21 +12,9 @@
          verbose="true">
     <testsuites>
         <testsuite name="Unit Tests">
-            <directory suffix="Test.php">tests/unit</directory>
+            <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-            <exclude>
-                <directory>src/AdvancedSearchBundle/DependencyInjection</directory>
-                <directory>src/AdvancedSearchBundle/Migrations</directory>
-                <directory>src/AdvancedSearchBundle/Resources</directory>
-                <file>src/AdvancedSearchBundle/AdvancedSearchBundle.php</file>
-            </exclude>
-        </whitelist>
-    </filter>
 
     <php>
         <env name="APP_ENV" value="test" />

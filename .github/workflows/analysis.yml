@@ -31,9 +31,3 @@ jobs:
           composer global require "sebastian/phpcpd":"^4.1" \
             --no-interaction --prefer-dist --ignore-platform-reqs --quiet
           /home/runner/.composer/vendor/bin/phpcpd src
-
-      - name: PHP DocBlock Checker
-        run: |
-          composer global require "block8/php-docblock-checker":"^1.10" \
-            --no-interaction --prefer-dist --ignore-platform-reqs --quiet
-          /home/runner/.composer/vendor/bin/phpdoccheck --directory=src
