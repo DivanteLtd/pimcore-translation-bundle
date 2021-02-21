@@ -1,13 +1,3 @@
-| Q             | A
-| ------------- | ---
-| Branch?       | master for features / 3.4 up to 4.2 for bug fixes
-| Bug fix?      | yes/no
-| New feature?  | yes/no
-| BC breaks?    | no
-| Deprecations? | yes/no
-| Tests pass?   | yes
-| Fixed tickets | #...
-
 Short description of this Pull Request.
     
 ## Changes

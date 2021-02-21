@@ -1,15 +1,15 @@
-# Google Translate
+# Pimcore Translate Bundle
 [![Analysis Actions](https://github.com/DivanteLtd/pimcore-google-translate/workflows/Analysis/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-google-translate/actions)
 [![Tests Actions](https://github.com/DivanteLtd/pimcore-google-translate/workflows/Tests/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-google-translate/actions)
 [![Latest Stable Version](https://poser.pugx.org/divante-ltd/pimcore-google-translate/v/stable)](https://packagist.org/packages/divante-ltd/pimcore-google-translate)
 [![Total Downloads](https://poser.pugx.org/divante-ltd/pimcore-google-translate/downloads)](https://packagist.org/packages/divante-ltd/pimcore-google-translate)
 [![License](https://poser.pugx.org/divante-ltd/pimcore-google-translate/license)](https://github.com/DivanteLtd/divante-ltd/pimcore-google-translate/blob/master/LICENSE)
 
-Copy data from the source language and translate it by using Google Translate integration.
+Copy data from the source language and translate it by using Google Translate or other integration.
 Supports input and wysiwyg.
 
 **Table of Contents**
-- [Google Translate](#google-translate)
+- [Pimcore Translate Bundle](#google-translate)
 	- [Compatibility](#compatibility)
 	- [Installing/Getting started](#installinggetting-started)
 	- [Requirements](#requirements)
@@ -28,21 +28,33 @@ This module is compatible with Pimcore 5.5.0 and higher.
 ## Installing/Getting started
 
 ```bash
-composer require divante-ltd/pimcore-google-translate
+composer require divante-ltd/pimcore-translate
 ```
 
 Enable the Bundle:
 ```bash
-./bin/console pimcore:bundle:enable GoogleTranslateBundle
+./bin/console pimcore:bundle:enable TranslateBundle
 ```
 
 ## Configuration
 
+Available providers:
+- `google_translate`
+
 ```
-divante_google_translate:
+divante_translate:
     api_key: 
     source_lang:
+    provider: # default google_translate
+    fallback_provider: # optional - fallback provider if first provider failed
 ```
+
+## How to add new provider
+Create Provider and implement interface 
+```
+DivanteTranslateBundle\Provider\ProviderInterface
+```
+
 
 #### How it works?
 
@@ -55,14 +67,7 @@ divante_google_translate:
 ## Testing
 Unit Tests:
 ```bash
-PIMCORE_TEST_DB_DSN="mysql://username:password@localhost/pimcore_test" \
-    vendor/bin/phpunit
-```
-
-Functional Tests:
-```bash
-PIMCORE_TEST_DB_DSN="mysql://username:password@localhost/pimcore_test" \
-    vendor/bin/codecept run -c tests/codeception.dist.yml
+vendor/bin/phpunit
 ```
 
 ## Contributing
