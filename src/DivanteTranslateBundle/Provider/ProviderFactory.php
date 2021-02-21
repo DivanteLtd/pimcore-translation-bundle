@@ -14,7 +14,7 @@ final class ProviderFactory
 
     public function __construct(iterable $providers)
     {
-       $this->providers = $providers;
+        $this->providers = $providers;
     }
 
     public function get(string $name): ProviderInterface
