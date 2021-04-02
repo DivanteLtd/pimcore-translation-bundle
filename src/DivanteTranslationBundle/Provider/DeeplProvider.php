@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace DivanteTranslateBundle\Provider;
+namespace DivanteTranslationBundle\Provider;
 
-use DivanteTranslateBundle\Exception\TranslationException;
+use DivanteTranslationBundle\Exception\TranslationException;
 
 class DeeplProvider extends AbstractProvider
 {
@@ -36,6 +36,6 @@ class DeeplProvider extends AbstractProvider
 
     public function getName(): string
     {
-        return 'google_translate';
+        return 'deepl';
     }
 }

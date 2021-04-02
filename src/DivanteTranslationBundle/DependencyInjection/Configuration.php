@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace DivanteTranslateBundle\DependencyInjection;
+namespace DivanteTranslationBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,13 +18,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('divante_google_translate');
+        $treeBuilder = new TreeBuilder('divante_translation');
 
         if (method_exists($treeBuilder, 'getRootNode')) {
             $rootNode = $treeBuilder->getRootNode();
         } else {
             // BC for symfony/config < 4.2
-            $rootNode = $treeBuilder->root('divante_google_translate');
+            $rootNode = $treeBuilder->root('divante_translation');
         }
 
         $rootNode

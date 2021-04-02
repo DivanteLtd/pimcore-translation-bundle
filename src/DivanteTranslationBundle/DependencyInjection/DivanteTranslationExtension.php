@@ -6,14 +6,14 @@
 
 declare(strict_types=1);
 
-namespace DivanteTranslateBundle\DependencyInjection;
+namespace DivanteTranslationBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-final class DivanteTranslateExtension extends Extension
+final class DivanteTranslationExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {

@@ -7,11 +7,10 @@
 
 declare(strict_types=1);
 
-namespace DivanteTranslateBundle\Controller;
+namespace DivanteTranslationBundle\Controller;
 
-use DivanteTranslateBundle\Exception\TranslationException;
-use DivanteTranslateBundle\Provider\ProviderFactory;
-use DivanteTranslateBundle\Service\ConfigurationService;
+use DivanteTranslationBundle\Exception\TranslationException;
+use DivanteTranslationBundle\Provider\ProviderFactory;
 use Pimcore\Bundle\AdminBundle\Controller\AdminController as BackendAdminController;
 use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
 use Pimcore\Model\DataObject;

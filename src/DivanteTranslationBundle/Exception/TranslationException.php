@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace DivanteTranslateBundle\Exception;
+namespace DivanteTranslationBundle\Exception;
 
 final class TranslationException extends \Exception
 {
