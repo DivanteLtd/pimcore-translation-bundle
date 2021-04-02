@@ -1,15 +1,15 @@
-# Pimcore Translate Bundle
-[![Analysis Actions](https://github.com/DivanteLtd/pimcore-google-translate/workflows/Analysis/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-google-translate/actions)
-[![Tests Actions](https://github.com/DivanteLtd/pimcore-google-translate/workflows/Tests/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-google-translate/actions)
-[![Latest Stable Version](https://poser.pugx.org/divante-ltd/pimcore-google-translate/v/stable)](https://packagist.org/packages/divante-ltd/pimcore-google-translate)
-[![Total Downloads](https://poser.pugx.org/divante-ltd/pimcore-google-translate/downloads)](https://packagist.org/packages/divante-ltd/pimcore-google-translate)
-[![License](https://poser.pugx.org/divante-ltd/pimcore-google-translate/license)](https://github.com/DivanteLtd/divante-ltd/pimcore-google-translate/blob/master/LICENSE)
+# Pimcore Translation Bundle
+[![Analysis Actions](https://github.com/DivanteLtd/pimcore-translation-bundle/workflows/Analysis/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-translation-bundle/actions)
+[![Tests Actions](https://github.com/DivanteLtd/pimcore-translation-bundle/workflows/Tests/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-translation-bundle/actions)
+[![Latest Stable Version](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/v/stable)](https://packagist.org/packages/divante-ltd/pimcore-translation-bundle)
+[![Total Downloads](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/downloads)](https://packagist.org/packages/divante-ltd/pimcore-translation-bundle)
+[![License](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/license)](https://github.com/DivanteLtd/divante-ltd/pimcore-translation-bundle/blob/master/LICENSE)
 
 Copy data from the source language and translate it by using Google Translate or other integration.
 Supports input and wysiwyg.
 
 **Table of Contents**
-- [Pimcore Translate Bundle](#google-translate)
+- [Pimcore Translation Bundle](#google-translate)
 	- [Compatibility](#compatibility)
 	- [Installing/Getting started](#installinggetting-started)
 	- [Requirements](#requirements)
@@ -28,18 +28,19 @@ This module is compatible with Pimcore 5.5.0 and higher.
 ## Installing/Getting started
 
 ```bash
-composer require divante-ltd/pimcore-translate
+composer require divante-ltd/pimcore-translation-bundle
 ```
 
 Enable the Bundle:
 ```bash
-./bin/console pimcore:bundle:enable TranslateBundle
+./bin/console pimcore:bundle:enable TranslationBundle
 ```
 
 ## Configuration
 
 Available providers:
 - `google_translate`
+- `deepl`
 
 ```
 divante_translate:
@@ -52,7 +53,7 @@ divante_translate:
 ## How to add new provider
 Create Provider and implement interface 
 ```
-DivanteTranslateBundle\Provider\ProviderInterface
+DivanteTranslationBundle\Provider\ProviderInterface
 ```
 
 

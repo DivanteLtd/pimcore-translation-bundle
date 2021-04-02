@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace DivanteTranslateBundle\Provider;
+namespace DivanteTranslationBundle\Provider;
 
 interface ProviderInterface
 {

@@ -1,8 +1,8 @@
 {
-  "name": "divante-ltd/pimcore-translate",
+  "name": "divante-ltd/pimcore-translation-bundle",
   "type": "pimcore-bundle",
   "license": "GPL-3.0-or-later",
-  "description": "Pimcore Translate Bundle",
+  "description": "Pimcore Translation Bundle",
   "keywords": [
     "pimcore",
     "pimcore-plugin",
@@ -43,13 +43,13 @@
   },
   "autoload": {
     "psr-4": {
-      "DivanteTranslateBundle\\": "src/DivanteTranslateBundle"
+      "DivanteTranslationBundle\\": "src/DivanteTranslationBundle"
     }
   },
   "extra": {
     "pimcore": {
       "bundles": [
-        "DivanteTranslateBundle\\DivanteTranslateBundle"
+        "DivanteTranslationBundle\\DivanteTranslationBundle"
       ]
     }
   }

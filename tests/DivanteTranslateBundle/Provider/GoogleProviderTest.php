@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\DivanteTranslateBundle\Service;
+namespace Tests\Unit\DivanteTranslationBundle\Service;
 
 use PHPUnit\Framework\TestCase;
 
