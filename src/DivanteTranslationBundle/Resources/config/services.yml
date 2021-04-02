@@ -1,9 +1,6 @@
 services:
     _instanceof:
       DivanteTranslationBundle\Provider\ProviderInterface:
-          arguments:
-              $apiKey: '%divante_translation.api_key%'
-              $fallbackApiKey: '%divante_translation.fallback_api_key%'
           tags: ['translation_bundle.provider']
 
     _defaults:
@@ -15,8 +12,11 @@ services:
         resource: '../../Controller'
         public: true
         arguments:
-            - '%divante_translation%'
+            - '%divante_translation.source_lang%'
+            - '%divante_translation.provider%'
         tags: ['controller.service_arguments']
 
     DivanteTranslationBundle\Provider\ProviderFactory:
-        arguments: [!tagged translation_bundle.provider]
+        arguments:
+            $apiKey: '%divante_translation.api_key%'
+            $providers: !tagged translation_bundle.provider

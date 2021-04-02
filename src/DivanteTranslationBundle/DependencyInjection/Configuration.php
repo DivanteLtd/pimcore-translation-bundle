@@ -38,10 +38,6 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('provider')
                     ->defaultValue('google_translate')
                 ->end()
-                ->scalarNode('fallback_provider')
-                ->end()
-                ->scalarNode('fallback_api_key')
-                ->end()
             ->end();
 
         return $treeBuilder;

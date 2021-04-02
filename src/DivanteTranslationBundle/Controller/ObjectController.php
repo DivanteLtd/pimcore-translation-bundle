@@ -11,22 +11,24 @@ namespace DivanteTranslationBundle\Controller;
 
 use DivanteTranslationBundle\Exception\TranslationException;
 use DivanteTranslationBundle\Provider\ProviderFactory;
-use Pimcore\Bundle\AdminBundle\Controller\AdminController as BackendAdminController;
+use Pimcore\Bundle\AdminBundle\Controller\AdminController;
 use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
 use Pimcore\Model\DataObject;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/object")
+ * @Route("/admin/object", name="divante_translation_bundle")
  */
-class ObjectController extends BackendAdminController
+final class ObjectController extends AdminController
 {
-    private array $configuration;
+    private string $sourceLanguage;
+    private string $provider;
 
-    public function __construct(array $configuration)
+    public function __construct(string $sourceLanguage, string $provider)
     {
-        $this->configuration = $configuration;
+        $this->sourceLanguage = $sourceLanguage;
+        $this->provider = $provider;
     }
 
     /**
@@ -40,7 +42,7 @@ class ObjectController extends BackendAdminController
             $lang = $request->get('lang');
             $fieldName = 'get' . ucfirst($request->get('fieldName'));
 
-            $data = $object->$fieldName($lang) ?? $object->$fieldName($this->configuration['source_lang']);
+            $data = $object->$fieldName($lang) ?? $object->$fieldName($this->sourceLanguage);
 
             if (!$data) {
                 return $this->adminJson([
@@ -49,13 +51,8 @@ class ObjectController extends BackendAdminController
                 ]);
             }
 
-            $provider = $providerFactory->get($this->configuration['provider']);
+            $provider = $providerFactory->get($this->provider);
             $data = $provider->translate($data, $lang);
-        } catch (TranslationException $exception) {
-            if ($this->configuration['fallback_provider']) {
-                $provider = $providerFactory->get($this->configuration['fallback_provider']);
-                $data = $provider->translate($data, $lang);
-            }
         } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,
@@ -86,7 +83,7 @@ class ObjectController extends BackendAdminController
         $fieldName = 'get' . ucfirst($request->get('fieldName'));
 
         try {
-            $data = $object->$fieldName($this->configuration['source_lang']);
+            $data = $object->$fieldName($this->sourceLanguage);
         } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,

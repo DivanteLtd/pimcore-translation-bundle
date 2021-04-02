@@ -31,11 +31,6 @@ This module is compatible with Pimcore 5.5.0 and higher.
 composer require divante-ltd/pimcore-translation-bundle
 ```
 
-Enable the Bundle:
-```bash
-./bin/console pimcore:bundle:enable TranslationBundle
-```
-
 ## Configuration
 
 Available providers:
@@ -43,11 +38,15 @@ Available providers:
 - `deepl`
 
 ```
-divante_translate:
+divante_translation:
     api_key: 
     source_lang:
     provider: # default google_translate
-    fallback_provider: # optional - fallback provider if first provider failed
+```
+
+Enable the Bundle:
+```bash
+bin/console pimcore:bundle:enable DivanteTranslationBundle
 ```
 
 ## How to add new provider
