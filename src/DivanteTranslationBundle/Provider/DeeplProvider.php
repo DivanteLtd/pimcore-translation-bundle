@@ -10,7 +10,7 @@ namespace DivanteTranslationBundle\Provider;
 
 use DivanteTranslationBundle\Exception\TranslationException;
 
-class DeeplProvider extends AbstractProvider
+final class DeeplProvider extends AbstractProvider
 {
     protected string $url = 'https://api.deepl.com/v2/translate';
 

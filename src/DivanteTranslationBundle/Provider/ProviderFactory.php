@@ -10,10 +10,12 @@ namespace DivanteTranslationBundle\Provider;
 
 final class ProviderFactory
 {
+    private string $apiKey;
     private iterable $providers;
 
-    public function __construct(iterable $providers)
+    public function __construct(string $apiKey, iterable $providers)
     {
+        $this->apiKey = $apiKey;
         $this->providers = $providers;
     }
 
@@ -22,6 +24,7 @@ final class ProviderFactory
         /** @var ProviderInterface $provider */
         foreach ($this->providers as $provider) {
             if ($provider->getName() === $name) {
+                $provider->setApiKey($this->apiKey);
                 return $provider;
             }
 

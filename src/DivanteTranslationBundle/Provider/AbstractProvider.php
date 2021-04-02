@@ -14,11 +14,12 @@ abstract class AbstractProvider implements ProviderInterface
 {
     protected string $url;
     protected string $apiKey;
-    protected bool $fallback = false;
 
-    public function __construct(string $apiKey, ?string $fallbackApiKey)
+    public function setApiKey(string $apiKey): self
     {
-        $this->apiKey = $this->fallback ? (string) $fallbackApiKey : $apiKey;
+        $this->apiKey = $apiKey;
+
+        return $this;
     }
 
     protected function getHttpClient(): Client

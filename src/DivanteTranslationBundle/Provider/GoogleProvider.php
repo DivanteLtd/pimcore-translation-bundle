@@ -10,7 +10,7 @@ namespace DivanteTranslationBundle\Provider;
 
 use DivanteTranslationBundle\Exception\TranslationException;
 
-class GoogleProvider extends AbstractProvider
+final class GoogleProvider extends AbstractProvider
 {
     protected string $url = 'https://www.googleapis.com/language/translate/v2';
 
