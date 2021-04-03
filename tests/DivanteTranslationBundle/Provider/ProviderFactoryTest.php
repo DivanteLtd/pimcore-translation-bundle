@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\DivanteTranslationBundle\Service;
+namespace Tests\DivanteTranslationBundle\Provider;
 
 use ArrayObject;
 use DivanteTranslationBundle\Exception\TranslationProviderNotImplemented;
