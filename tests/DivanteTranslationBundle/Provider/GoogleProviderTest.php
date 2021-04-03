@@ -42,7 +42,9 @@ final class GoogleProviderTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $this->googleProvider = $this->getMockBuilder(GoogleProvider::class)->getMock();
+        $this->googleProvider = $this->getMockBuilder(GoogleProvider::class)
+            ->onlyMethods(['getHttpClient'])
+            ->getMock();
         $this->googleProvider->method('getHttpClient')->willReturn($client);
     }
 
