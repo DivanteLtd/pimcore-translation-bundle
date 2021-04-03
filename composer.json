@@ -27,12 +27,8 @@
       "role": "Developer"
     }
   ],
-  "config": {
-    "platform": {
-      "php": ">=7.4"
-    }
-  },
   "require": {
+    "php": ">=7.4",
     "ext-intl": "*",
     "ext-json": "*",
     "pimcore/pimcore": ">=5.5.0",
