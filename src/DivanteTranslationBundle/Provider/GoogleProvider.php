@@ -12,23 +12,26 @@ use DivanteTranslationBundle\Exception\TranslationException;
 
 final class GoogleProvider extends AbstractProvider
 {
-    protected string $url = 'https://www.googleapis.com/language/translate/v2';
+    protected string $url = 'https://www.googleapis.com/';
 
     public function translate(string $data, string $targetLanguage): string
     {
         try {
-            $response = $this->getHttpClient()->request('GET', [
-                'query' => [
-                    'key' => $this->apiKey,
-                    'q' => rawurlencode($data),
-                    'source' => '',
-                    'target' => locale_get_primary_language($targetLanguage),
+            $response = $this->getHttpClient()->request(
+                'GET',
+                'language/translate/v2',
+                [
+                    'query' => [
+                        'key' => $this->apiKey,
+                        'q' => rawurlencode($data),
+                        'source' => '',
+                        'target' => locale_get_primary_language($targetLanguage),
+                    ]
                 ]
-            ]);
+            );
 
-            $body = $response->getBody();
+            $body = $response->getBody()->getContents();
             $data = json_decode($body, true);
-
             if ($data['error']) {
                 throw new TranslationException();
             }

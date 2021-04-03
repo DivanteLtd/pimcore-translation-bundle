@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace DivanteTranslationBundle\Controller;
 
-use DivanteTranslationBundle\Exception\TranslationException;
 use DivanteTranslationBundle\Provider\ProviderFactory;
 use Pimcore\Bundle\AdminBundle\Controller\AdminController;
 use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
@@ -18,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/object", name="divante_translation_bundle")
+ * @Route("/admin/object")
  */
 final class ObjectController extends AdminController
 {
@@ -32,7 +31,7 @@ final class ObjectController extends AdminController
     }
 
     /**
-     * @Route("/translate-field")
+     * @Route("/translate-field", methods={"GET"})
      */
     public function translateFieldAction(Request $request, ProviderFactory $providerFactory): JsonResponse
     {
@@ -67,7 +66,7 @@ final class ObjectController extends AdminController
     }
 
     /**
-     * @Route("/get-field-data")
+     * @Route("/get-field-data", methods={"GET"})
      */
     public function getFieldDataAction(Request $request): JsonResponse
     {
