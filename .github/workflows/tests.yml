@@ -4,12 +4,6 @@ on: [push]
 jobs:
   build-test:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        php: [ 7.4, 8.0 ]
-
-    name: PHP - ${{ matrix.php }}
 
     steps:
       - name: Checkout code
@@ -18,7 +12,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: 7.4
           extensions: intl, json
           tools: composer:v2
           coverage: none
