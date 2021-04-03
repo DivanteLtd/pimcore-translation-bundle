@@ -12,20 +12,24 @@ use DivanteTranslationBundle\Exception\TranslationException;
 
 final class DeeplProvider extends AbstractProvider
 {
-    protected string $url = 'https://api.deepl.com/v2/translate';
+    protected string $url = 'https://api.deepl.com/';
 
     public function translate(string $data, string $targetLanguage): string
     {
         try {
-            $response = $this->getHttpClient()->request('POST', [
-                'query' => [
-                    'auth_key' => $this->apiKey,
-                    'text' => rawurlencode($data),
-                    'target_lang' => locale_get_primary_language($targetLanguage),
+            $response = $this->getHttpClient()->request(
+                'POST',
+                'v2/translate',
+                [
+                    'query' => [
+                        'auth_key' => $this->apiKey,
+                        'text' => rawurlencode($data),
+                        'target_lang' => locale_get_primary_language($targetLanguage),
+                    ]
                 ]
-            ]);
+            );
 
-            $body = $response->getBody();
+            $body = $response->getBody()->getContents();
             $data = json_decode($body, true);
         } catch (\Throwable $exception) {
             throw new TranslationException();

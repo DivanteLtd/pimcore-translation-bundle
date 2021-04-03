@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace DivanteTranslationBundle\Provider;
 
-final class ProviderFactory
+use DivanteTranslationBundle\Exception\TranslationProviderNotImplemented;
+
+class ProviderFactory
 {
     private string $apiKey;
     private iterable $providers;
@@ -27,8 +29,8 @@ final class ProviderFactory
                 $provider->setApiKey($this->apiKey);
                 return $provider;
             }
-
-            // TODO throw notimplemented
         }
+
+        throw new TranslationProviderNotImplemented($name);
     }
 }

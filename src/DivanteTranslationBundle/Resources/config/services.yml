@@ -16,6 +16,9 @@ services:
             - '%divante_translation.provider%'
         tags: ['controller.service_arguments']
 
+    DivanteTranslationBundle\Provider\:
+      resource: '../../Provider'
+
     DivanteTranslationBundle\Provider\ProviderFactory:
         arguments:
             $apiKey: '%divante_translation.api_key%'
