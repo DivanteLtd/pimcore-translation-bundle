@@ -4,7 +4,7 @@
 [![Total Downloads](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/downloads)](https://packagist.org/packages/divante-ltd/pimcore-translation-bundle)
 [![License](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/license)](https://github.com/DivanteLtd/divante-ltd/pimcore-translation-bundle/blob/master/LICENSE)
 
-Copy data from the source language and translate it by using Google Translate, Deepls or other integration.
+Copy data from the source language and translate it by using Google Translate, Deepl or other integration.
 Supports input and wysiwyg.
 
 **Table of Contents**
