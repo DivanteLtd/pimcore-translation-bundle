@@ -29,9 +29,9 @@ class GoogleProvider extends AbstractProvider
                     ]
                 ]
             );
-
             $body = $response->getBody()->getContents();
             $data = json_decode($body, true);
+
             if ($data['error']) {
                 throw new TranslationException();
             }

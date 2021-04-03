@@ -6,6 +6,7 @@ namespace Tests\DivanteTranslationBundle\Provider;
 
 use DivanteTranslationBundle\Exception\TranslationException;
 use DivanteTranslationBundle\Provider\GoogleProvider;
+use DivanteTranslationBundle\Provider\ProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -14,11 +15,9 @@ use PHPUnit\Framework\TestCase;
 
 final class GoogleProviderTest extends TestCase
 {
-    private GoogleProvider $googleProvider;
-
-    public function setUp(): void
+    public function testTranslate(): void
     {
-        $correctResponse = [
+        $response = [
             'data' => [
                 'translations' => [
                     [
@@ -28,35 +27,31 @@ final class GoogleProviderTest extends TestCase
             ],
         ];
 
-        $incorrectResponse = [
-            'data' => [
-                'error' => 'error text',
-            ],
-        ];
-
-        $mock = new MockHandler([
-            new Response(200, [], json_encode($correctResponse)),
-            new Response(200, [], json_encode($incorrectResponse)),
-        ]);
-
-        $handlerStack = HandlerStack::create($mock);
-        $client = new Client(['handler' => $handlerStack]);
-
-        $this->googleProvider = $this->getMockBuilder(GoogleProvider::class)
-            ->onlyMethods(['getHttpClient'])
-            ->getMock();
-        $this->googleProvider->method('getHttpClient')->willReturn($client);
-    }
-
-    public function testTranslate(): void
-    {
-        $this->assertSame('test', $this->googleProvider->translate('test', 'en'));
+        $this->assertSame('test', $this->createProvider($response)->translate('test', 'en'));
     }
 
     public function testTranslateError(): void
     {
         $this->expectException(TranslationException::class);
 
-        $this->googleProvider->translate('test', 'en');
+        $response = ['error' => 'error text'];
+
+        $this->createProvider($response)->translate('test_error', 'en');
+    }
+
+    private function createProvider(array $response): ProviderInterface
+    {
+        $mock = new MockHandler([
+            new Response(200, [], json_encode($response)),
+        ]);
+        $handlerStack = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handlerStack]);
+        $provider = $this->getMockBuilder(GoogleProvider::class)
+            ->onlyMethods(['getHttpClient'])
+            ->getMock();
+        $provider->method('getHttpClient')->willReturn($client);
+        $provider->setApiKey('test');
+
+        return $provider;
     }
 }
