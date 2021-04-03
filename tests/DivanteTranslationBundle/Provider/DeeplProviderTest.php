@@ -34,7 +34,9 @@ final class DeeplProviderTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $this->deeplProvider = $this->getMockBuilder(DeeplProvider::class)->getMock();
+        $this->deeplProvider = $this->getMockBuilder(DeeplProvider::class)
+            ->onlyMethods(['getHttpClient'])
+            ->getMock();
         $this->deeplProvider->method('getHttpClient')->willReturn($client);
     }
 
