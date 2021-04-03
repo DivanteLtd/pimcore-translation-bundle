@@ -39,7 +39,8 @@
   },
   "autoload": {
     "psr-4": {
-      "DivanteTranslationBundle\\": "src/DivanteTranslationBundle"
+      "DivanteTranslationBundle\\": "src/DivanteTranslationBundle",
+      "Tests\\": "tests"
     }
   },
   "extra": {
