@@ -7,7 +7,8 @@
     "pimcore",
     "pimcore-plugin",
     "google translate",
-    "pimcore translate"
+    "pimcore translate",
+    "deepl translate"
   ],
   "homepage": "https://www.divante.com",
   "authors": [

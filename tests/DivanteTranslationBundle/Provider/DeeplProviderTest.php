@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\DivanteTranslationBundle\Provider;
 
 use DivanteTranslationBundle\Provider\DeeplProvider;
+use DivanteTranslationBundle\Provider\GoogleProvider;
+use DivanteTranslationBundle\Provider\ProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -13,11 +15,9 @@ use PHPUnit\Framework\TestCase;
 
 final class DeeplProviderTest extends TestCase
 {
-    private DeeplProvider $deeplProvider;
-
-    public function setUp(): void
+    public function testTranslate(): void
     {
-        $correctResponse = [
+        $response = [
             'data' => [
                 'translations' => [
                     [
@@ -27,21 +27,22 @@ final class DeeplProviderTest extends TestCase
             ],
         ];
 
-        $mock = new MockHandler([
-            new Response(200, [], json_encode($correctResponse)),
-        ]);
-
-        $handlerStack = HandlerStack::create($mock);
-        $client = new Client(['handler' => $handlerStack]);
-
-        $this->deeplProvider = $this->getMockBuilder(DeeplProvider::class)
-            ->onlyMethods(['getHttpClient'])
-            ->getMock();
-        $this->deeplProvider->method('getHttpClient')->willReturn($client);
+        $this->assertSame('test', $this->createProvider($response)->translate('test', 'en'));
     }
 
-    public function testTranslate(): void
+    private function createProvider(array $response): ProviderInterface
     {
-        $this->assertSame('test', $this->deeplProvider->translate('test', 'en'));
+        $mock = new MockHandler([
+            new Response(200, [], json_encode($response)),
+        ]);
+        $handlerStack = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handlerStack]);
+        $provider = $this->getMockBuilder(DeeplProvider::class)
+            ->onlyMethods(['getHttpClient'])
+            ->getMock();
+        $provider->method('getHttpClient')->willReturn($client);
+        $provider->setApiKey('test');
+
+        return $provider;
     }
 }
