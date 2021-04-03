@@ -4,15 +4,27 @@ on: [push]
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ 7.4, 8.9 ]
+
+    name: PHP - ${{ matrix.php }}
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        uses: php-actions/composer@v5
-      - name: PHPUnit Tests
-        uses: php-actions/phpunit@v9
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          bootstrap: vendor/autoload.php
-          configuration: phpunit.xml
-          args: --coverage-text
-          version: 2
+          php-version: ${{ matrix.php }}
+          extensions: intl, json
+          tools: composer:v2
+          coverage: none
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+        
+      - name: Execute tests
+        run: vendor/bin/phpunit --verbose
