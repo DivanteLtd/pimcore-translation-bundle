@@ -1,6 +1,5 @@
 # Pimcore Translation Bundle
-[![Analysis Actions](https://github.com/DivanteLtd/pimcore-translation-bundle/workflows/Analysis/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-translation-bundle/actions)
-[![Tests Actions](https://github.com/DivanteLtd/pimcore-translation-bundle/workflows/Tests/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-translation-bundle/actions)
+[![Tests Actions](https://github.com/DivanteLtd/pimcore-translation-bundle/workflows/tests.yml/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-translation-bundle/actions)
 [![Latest Stable Version](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/v/stable)](https://packagist.org/packages/divante-ltd/pimcore-translation-bundle)
 [![Total Downloads](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/downloads)](https://packagist.org/packages/divante-ltd/pimcore-translation-bundle)
 [![License](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/license)](https://github.com/DivanteLtd/divante-ltd/pimcore-translation-bundle/blob/master/LICENSE)
