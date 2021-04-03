@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ProviderFactoryTest extends TestCase
 {
-    public function testGet()
+    public function testGet(): void
     {
         $factory = new ProviderFactory('test', $this->getProviders());
 
@@ -20,7 +20,7 @@ final class ProviderFactoryTest extends TestCase
         $this->assertInstanceOf(ProviderInterface::class, $factory->get('deepl'));
     }
 
-    public function testGetException()
+    public function testGetException(): void
     {
         $this->expectException(TranslationProviderNotImplemented::class);
 
