@@ -23,7 +23,7 @@ class GoogleProvider extends AbstractProvider
                 [
                     'query' => [
                         'key' => $this->apiKey,
-                        'q' => rawurlencode($data),
+                        'q' => $data,
                         'source' => '',
                         'target' => locale_get_primary_language($targetLanguage),
                     ]
