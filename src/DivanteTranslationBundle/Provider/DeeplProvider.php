@@ -23,7 +23,7 @@ class DeeplProvider extends AbstractProvider
                 [
                     'query' => [
                         'auth_key' => $this->apiKey,
-                        'text' => rawurlencode($data),
+                        'text' => $data,
                         'target_lang' => locale_get_primary_language($targetLanguage),
                     ]
                 ]
