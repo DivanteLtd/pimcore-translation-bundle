@@ -48,6 +48,18 @@ pimcore.object.tags.input = Class.create(pimcore.object.tags.input, {
 
         this.component = new Ext.form.TextField(input);
 
+        if (this.context.language) {
+            this.translateButton = new pimcore.object.elementservice.translateButton(
+                this.object.data.general.o_id,
+                this.fieldConfig.name,
+                this.component,
+                'input',
+                this.context.language
+            );
+        } else {
+            this.translateButton = {};
+        }
+
         if (this.fieldConfig.showCharCount) {
             var charCount = Ext.create("Ext.Panel", {
                 bodyStyle: '',
@@ -73,42 +85,17 @@ pimcore.object.tags.input = Class.create(pimcore.object.tags.input, {
                 },
                 items: [
                     this.component,
-                    charCount
+                    charCount,
+                    this.translateButton,
                 ]
             });
 
         } else {
-            if (this.context.language) {
-                this.copyButton = new pimcore.object.elementservice.addCopyButton(
-                    this.object.data.general.o_id,
-                    this.fieldConfig.name,
-                    this.component,
-                    'input',
-                    this.context.language
-                );
-            }
-            else {
-                this.copyButton = {};
-
-            }
-            if (this.context.language) {
-                this.translateButton = new pimcore.object.elementservice.translateButton(
-                    this.object.data.general.o_id,
-                    this.fieldConfig.name,
-                    this.component,
-                    'input',
-                    this.context.language
-                );
-            } else {
-                this.translateButton = {};
-            }
-
             return Ext.create('Ext.form.FieldContainer', {
                 labelWidth: input.width,
                 layout: 'hbox',
                 items: [
                     this.component,
-                    this.copyButton,
                     this.translateButton,
                 ],
                 componentCls: "object_field",
