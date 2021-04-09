@@ -64,35 +64,4 @@ final class ObjectController extends AdminController
             'data' => $data,
         ]);
     }
-
-    /**
-     * @Route("/get-field-data", methods={"GET"})
-     */
-    public function getFieldDataAction(Request $request): JsonResponse
-    {
-        $object = DataObject::getById($request->get('sourceId'));
-
-        if (!$object instanceof DataObject) {
-            return $this->adminJson([
-                'success' => false,
-                'message' => 'Object doesn\'t exist',
-            ]);
-        }
-
-        $fieldName = 'get' . ucfirst($request->get('fieldName'));
-
-        try {
-            $data = $object->$fieldName($this->sourceLanguage);
-        } catch (\Throwable $exception) {
-            return $this->adminJson([
-                'success' => false,
-                'message' => 'Field not found',
-            ]);
-        }
-
-        return $this->adminJson([
-            'success' => true,
-            'data' => $data,
-        ]);
-    }
 }

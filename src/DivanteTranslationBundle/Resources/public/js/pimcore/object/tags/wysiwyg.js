@@ -25,18 +25,6 @@ pimcore.object.tags.wysiwyg = Class.create(pimcore.object.tags.wysiwyg, {
                 this.ckeditor = null;
             }
         }.bind(this));
-        if (this.context.language) {
-            this.copyButton = new pimcore.object.elementservice.addCopyButton(
-                this.object.data.general.o_id,
-                this.fieldConfig.name,
-                this,
-                'wysiwyg',
-                this.context.language
-            );
-        }
-        else {
-            this.copyButton = {};
-        }
         if (this.fieldConfig.width) {
             width = this.fieldConfig.width;
         }
@@ -60,7 +48,6 @@ pimcore.object.tags.wysiwyg = Class.create(pimcore.object.tags.wysiwyg, {
             layout: 'hbox',
             items: [
                 this.component,
-                this.copyButton,
                 this.translateButton,
             ],
             componentCls: "object_field custom_wysiwyg",
