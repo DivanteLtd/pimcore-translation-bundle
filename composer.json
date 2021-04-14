@@ -1,0 +1,54 @@
+{
+  "name": "divante-ltd/pimcore-translation-bundle",
+  "type": "pimcore-bundle",
+  "license": "GPL-3.0-or-later",
+  "description": "Pimcore Translation Bundle",
+  "keywords": [
+    "pimcore",
+    "pimcore-plugin",
+    "google translate",
+    "pimcore translate",
+    "deepl translate"
+  ],
+  "homepage": "https://www.divante.com",
+  "authors": [
+    {
+      "name": "Piotr Rugala",
+      "email": "piotr@isedo.pl",
+      "role": "Developer"
+    },
+    {
+      "name": "Łukasz Marszałek",
+      "email": "lmarszalek@divante.pl",
+      "role": "Developer"
+    },
+    {
+      "name": "Bruno Ramalho",
+      "email": "bramalho@divante.pl",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "ext-intl": "*",
+    "ext-json": "*",
+    "pimcore/pimcore": ">=5.5.0",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "DivanteTranslationBundle\\": "src/DivanteTranslationBundle",
+      "Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "pimcore": {
+      "bundles": [
+        "DivanteTranslationBundle\\DivanteTranslationBundle"
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+services:
+    _instanceof:
+      DivanteTranslationBundle\Provider\ProviderInterface:
+          tags: ['translation_bundle.provider']
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    DivanteTranslationBundle\Controller\:
+        resource: '../../Controller'
+        public: true
+        arguments:
+            - '%divante_translation.source_lang%'
+            - '%divante_translation.provider%'
+        tags: ['controller.service_arguments']
+
+    DivanteTranslationBundle\Provider\:
+      resource: '../../Provider'
+
+    DivanteTranslationBundle\Provider\ProviderFactory:
+        arguments:
+            $apiKey: '%divante_translation.api_key%'
+            $providers: !tagged translation_bundle.provider

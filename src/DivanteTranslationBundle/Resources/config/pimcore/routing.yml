@@ -1,0 +1,3 @@
+divante_translation_bundle:
+    resource: "@DivanteTranslationBundle/Controller/"
+    type: annotation
