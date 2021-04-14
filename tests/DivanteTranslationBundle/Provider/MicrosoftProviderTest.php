@@ -8,8 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\DivanteTranslationBundle\Provider;
 
-use DivanteTranslationBundle\Exception\TranslationException;
-use DivanteTranslationBundle\Provider\GoogleProvider;
+use DivanteTranslationBundle\Provider\MicrosoftProvider;
 use DivanteTranslationBundle\Provider\ProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -17,30 +16,21 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
-final class GoogleProviderTest extends TestCase
+final class MicrosoftProviderTest extends TestCase
 {
     public function testTranslate(): void
     {
         $response = [
-            'data' => [
+            [
                 'translations' => [
                     [
-                        'translatedText' => 'test'
+                        'text' => 'test'
                     ],
                 ],
             ],
         ];
 
         $this->assertSame('test', $this->createProvider($response)->translate('test', 'en'));
-    }
-
-    public function testTranslateError(): void
-    {
-        $this->expectException(TranslationException::class);
-
-        $response = ['error' => 'error text'];
-
-        $this->createProvider($response)->translate('test_error', 'en');
     }
 
     private function createProvider(array $response): ProviderInterface
@@ -50,7 +40,7 @@ final class GoogleProviderTest extends TestCase
         ]);
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
-        $provider = $this->getMockBuilder(GoogleProvider::class)
+        $provider = $this->getMockBuilder(MicrosoftProvider::class)
             ->onlyMethods(['getHttpClient'])
             ->getMock();
         $provider->method('getHttpClient')->willReturn($client);

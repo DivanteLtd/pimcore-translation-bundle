@@ -4,8 +4,12 @@
 [![Total Downloads](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/downloads)](https://packagist.org/packages/divante-ltd/pimcore-translation-bundle)
 [![License](https://poser.pugx.org/divante-ltd/pimcore-translation-bundle/license)](https://github.com/DivanteLtd/divante-ltd/pimcore-translation-bundle/blob/master/LICENSE)
 
-Copy data from the source language and translate it by using Google Translate, Deepl or other integration.
-Supports input and wysiwyg.
+Copy data from the source language and translate it by using:
+- Google Translate (https://cloud.google.com/translate)
+- Deepl (https://www.deepl.com/en/docs-api/)
+- Microsoft Translator (global region) (https://azure.microsoft.com/en-en/services/cognitive-services/translator/)
+
+Supports input, textarea and wysiwyg fields.
 
 **Table of Contents**
 - [Pimcore Translation Bundle](#google-translate)
@@ -35,12 +39,13 @@ composer require divante-ltd/pimcore-translation-bundle
 Available providers:
 - `google_translate`
 - `deepl`
+- `microsoft_translate`
 
 ```
 divante_translation:
     api_key: 
     source_lang:
-    provider: # default google_translate
+    provider: # default provider: google_translate
 ```
 
 Enable the Bundle:
