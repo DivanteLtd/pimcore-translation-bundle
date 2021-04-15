@@ -26,7 +26,7 @@ Supports input, textarea and wysiwyg fields.
 
 ## Compatibility
 
-This module is compatible with Pimcore 5.5.0 and higher.
+This module is compatible with Pimcore 5.5.0 and higher. Including Pimcore 10.
 
 ## Installing/Getting started
 
@@ -61,11 +61,6 @@ DivanteTranslationBundle\Provider\ProviderInterface
 
 
 #### How it works?
-
-- Copy
-![Screenshot](docs/copy.png)
-
-- Translation
 ![Screenshot](docs/translate.png)
 
 ## Testing
