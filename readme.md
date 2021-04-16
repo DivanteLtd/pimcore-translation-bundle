@@ -73,8 +73,8 @@ vendor/bin/phpunit
 If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
 ## Licence 
-CoreShop VsBridge source code is completely free and released under the 
-[GNU General Public License v3.0](https://github.com/DivanteLtd/divante-ltd/pimcore-google-translate/blob/master/LICENSE).
+Pimcore Translation Bundle source code is completely free and released under the 
+[MIT](https://github.com/DivanteLtd/pimcore-translation-bundle/blob/master/LICENSE).
 
 ## Standards & Code Quality
 This module respects all Pimcore 5 code quality rules and our own PHPCS and PHPMD rulesets.
