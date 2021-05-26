@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\DivanteTranslationBundle\Provider;
 
-use DivanteTranslationBundle\Provider\DeeplProvider;
+use DivanteTranslationBundle\Provider\DeeplFreeProvider;
 use DivanteTranslationBundle\Provider\ProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -16,7 +16,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
-final class DeeplProviderTest extends TestCase
+final class DeeplFreeProviderTest extends TestCase
 {
     public function testTranslate(): void
     {
@@ -38,7 +38,7 @@ final class DeeplProviderTest extends TestCase
         ]);
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
-        $provider = $this->getMockBuilder(DeeplProvider::class)
+        $provider = $this->getMockBuilder(DeeplFreeProvider::class)
             ->onlyMethods(['getHttpClient'])
             ->getMock();
         $provider->method('getHttpClient')->willReturn($client);

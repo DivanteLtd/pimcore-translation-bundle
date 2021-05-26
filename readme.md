@@ -39,16 +39,27 @@ composer require divante-ltd/pimcore-translation-bundle
 Available providers:
 - `google_translate`
 - `deepl`
+- `deepl_free` - free version of DeepL API
 - `microsoft_translate`
 
 ```
 divante_translation:
     api_key: 
     source_lang:
-    provider: # default provider: google_translate
+    provider:  # default provider: google_translate
+    formality: # working for providers deepl and deepl_free only.
 ```
 
-Enable the Bundle:
+#### DeepL Formality:
+Sets whether the translated text should lean towards formal or informal language.\
+This feature currently only works for target languages "DE" (German), "FR" (French), "IT" (Italian), "ES" (Spanish), "NL" (Dutch), "PL" (Polish), "PT-PT", "PT-BR" (Portuguese) and "RU" (Russian).
+
+Possible options are:\
+"default" (default)\
+"more" - for a more formal language\
+"less" - for a more informal language\
+
+### Enable the Bundle:
 ```bash
 bin/console pimcore:bundle:enable DivanteTranslationBundle
 ```
@@ -59,6 +70,10 @@ Create Provider and implement interface
 DivanteTranslationBundle\Provider\ProviderInterface
 ```
 
+If your provider has a option to set `formality` option implement interface:
+```
+DivanteTranslationBundle\Provider\FormalityProviderInterface
+```
 
 #### How it works?
 ![Screenshot](docs/translate.png)
