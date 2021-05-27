@@ -10,9 +10,17 @@ namespace DivanteTranslationBundle\Provider;
 
 use DivanteTranslationBundle\Exception\TranslationException;
 
-class DeeplProvider extends AbstractProvider
+class DeeplProvider extends AbstractProvider implements FormalityProviderInterface
 {
     protected string $url = 'https://api.deepl.com/';
+    protected string $formality = 'default';
+
+    public function setFormality(?string $formality): self
+    {
+        $this->formality = $formality ?? $this->formality;
+
+        return $this;
+    }
 
     public function translate(string $data, string $targetLanguage): string
     {
@@ -25,6 +33,7 @@ class DeeplProvider extends AbstractProvider
                         'auth_key' => $this->apiKey,
                         'text' => $data,
                         'target_lang' => locale_get_primary_language($targetLanguage),
+                        'formality' => $this->formality
                     ]
                 ]
             );
@@ -35,7 +44,7 @@ class DeeplProvider extends AbstractProvider
             throw new TranslationException();
         }
 
-        return $data['data']['translations'][0]['text'];
+        return $data['translations'][0]['text'];
     }
 
     public function getName(): string
