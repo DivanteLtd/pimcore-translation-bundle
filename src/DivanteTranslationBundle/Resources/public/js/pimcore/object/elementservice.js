@@ -14,18 +14,21 @@ pimcore.object.elementservice.translateButton = function (id, fieldName, compone
                     handler: function () {
                         handleTranslationRequest(id, fieldName, component, type, lang, 'default')
                     }.bind(this),
+                    iconCls: "pimcore_icon_more",
                 },
                 {
                     text: 'Formality More',
                     handler: function () {
                         handleTranslationRequest(id, fieldName, component, type, lang, 'more')
                     }.bind(this),
+                    iconCls: 'pimcore_icon_up'
                 },
                 {
                     text: 'Formality Less',
                     handler: function () {
                         handleTranslationRequest(id, fieldName, component, type, lang, 'less')
                     }.bind(this),
+                    iconCls: 'pimcore_icon_down'
                 },
             ],
             style: "margin-left: 10px; filter:grayscale(100%);",
