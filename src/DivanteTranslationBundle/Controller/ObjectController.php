@@ -41,7 +41,7 @@ final class ObjectController extends AdminController
             $lang = $request->get('lang');
             $fieldName = 'get' . ucfirst($request->get('fieldName'));
 
-            $data = $object->$fieldName($lang) ?? $object->$fieldName($this->sourceLanguage);
+            $data = $object->$fieldName($lang) ?: $object->$fieldName($this->sourceLanguage);
 
             if (!$data) {
                 return $this->adminJson([
@@ -51,6 +51,10 @@ final class ObjectController extends AdminController
             }
 
             $provider = $providerFactory->get($this->provider);
+            if ($request->get('formality') && ($this->provider === 'deepl' || $this->provider === 'deepl_free')) {
+                $provider->setFormality($request->get('formality'));
+            }
+
             $data = $provider->translate($data, $lang);
         } catch (\Throwable $exception) {
             return $this->adminJson([
