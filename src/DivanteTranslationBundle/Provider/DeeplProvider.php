@@ -41,7 +41,7 @@ class DeeplProvider extends AbstractProvider implements FormalityProviderInterfa
             $body = $response->getBody()->getContents();
             $data = json_decode($body, true);
         } catch (\Throwable $exception) {
-            throw new TranslationException();
+            throw new TranslationException($exception->getMessage());
         }
 
         return $data['translations'][0]['text'];
