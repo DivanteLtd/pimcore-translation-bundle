@@ -59,7 +59,7 @@ final class ObjectController extends AdminController
         } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,
-                'message' => 'Something went wrong',
+                'message' => $exception->getMessage()
             ]);
         }
 
