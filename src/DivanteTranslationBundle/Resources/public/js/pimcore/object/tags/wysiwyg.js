@@ -29,7 +29,7 @@ pimcore.object.tags.wysiwyg = Class.create(pimcore.object.tags.wysiwyg, {
             width = this.fieldConfig.width;
         }
 
-        if (this.context.language) {
+        if (this.context && this.context.language) {
             this.translateButton = new pimcore.object.elementservice.translateButton(
                 this.object.data.general.o_id,
                 this.fieldConfig.name,
