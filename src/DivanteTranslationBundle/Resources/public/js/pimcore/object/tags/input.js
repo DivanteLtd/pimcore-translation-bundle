@@ -48,7 +48,7 @@ pimcore.object.tags.input = Class.create(pimcore.object.tags.input, {
 
         this.component = new Ext.form.TextField(input);
 
-        if (this.context.language) {
+        if (this.context && this.context.language) {
             this.translateButton = new pimcore.object.elementservice.translateButton(
                 this.object.data.general.o_id,
                 this.fieldConfig.name,
