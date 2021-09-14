@@ -49,9 +49,8 @@ final class ObjectController extends AdminController
                 $block = $object->$blockName()[$blockElementIndex];
 
                 /** @var DataObject\Localizedfield $localizedfield */
-                $localizedfield = $block[$blockElementIndex]['localizedfields'];
-
-                $data = $localizedfield->getLocalizedValue($fieldName);
+                $localizedfield = $block['localizedfields']->getData();
+                $data = $localizedfield->getLocalizedValue($fieldName, $lang) ?: $localizedfield->getLocalizedValue($fieldName, $this->sourceLanguage);
             } else {
                 $fieldName = 'get' . ucfirst($fieldName);
                 $data = $object->$fieldName($lang) ?: $object->$fieldName($this->sourceLanguage);
