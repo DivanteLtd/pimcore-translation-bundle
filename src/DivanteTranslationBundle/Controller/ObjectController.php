@@ -35,28 +35,36 @@ final class ObjectController extends AdminController
      */
     public function translateFieldAction(Request $request, ProviderFactory $providerFactory): JsonResponse
     {
+        $result = '';
         try {
             $object = DataObject::getById($request->get('sourceId'));
-
             $lang = $request->get('lang');
-            $fieldName = 'get' . ucfirst($request->get('fieldName'));
+            $fieldName = $request->get('fieldName');
+            $formality = $request->get('formality');
 
-            $data = $object->$fieldName($lang) ?: $object->$fieldName($this->sourceLanguage);
+            $blockName = $request->get('blockName');
+            if ($blockName) {
+                $blockElementIndex = (int)$request->get('blockElementIndex');
+                $blockName = 'get' . ucfirst($blockName);
+                $block = $object->$blockName()[$blockElementIndex];
 
-            if (!$data) {
-                return $this->adminJson([
-                    'success' => false,
-                    'message' => 'Data are empty',
-                ]);
+                /** @var DataObject\Localizedfield $localizedfield */
+                $localizedfield = $block[$blockElementIndex]['localizedfields'];
+
+                $data = $localizedfield->getLocalizedValue($fieldName);
+            } else {
+                $fieldName = 'get' . ucfirst($fieldName);
+                $data = $object->$fieldName($lang) ?: $object->$fieldName($this->sourceLanguage);
             }
 
             $provider = $providerFactory->get($this->provider);
-            if ($request->get('formality') && ($this->provider === 'deepl' || $this->provider === 'deepl_free')) {
-                $provider->setFormality($request->get('formality'));
+            if ($formality && ($this->provider === 'deepl' || $this->provider === 'deepl_free')) {
+                $provider->setFormality($formality);
             }
 
             $data = strip_tags($data);
-            $data = $provider->translate($data, $lang);
+            $result = $provider->translate($data, $lang);
+
         } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,
@@ -66,7 +74,7 @@ final class ObjectController extends AdminController
 
         return $this->adminJson([
             'success' => true,
-            'data' => $data,
+            'data' => $result,
         ]);
     }
 }
