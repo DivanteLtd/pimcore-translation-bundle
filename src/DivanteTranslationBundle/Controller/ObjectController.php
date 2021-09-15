@@ -39,21 +39,28 @@ final class ObjectController extends AdminController
         try {
             $object = DataObject::getById($request->get('sourceId'));
             $lang = $request->get('lang');
-            $fieldName = $request->get('fieldName');
+            $field = $request->get('fieldName');
             $formality = $request->get('formality');
 
-            $blockName = $request->get('blockName');
-            if ($blockName) {
+            $block = $request->get('block');
+            $objectBrick = $request->get('objectBrick');
+            if ($block) {
                 $blockElementIndex = (int)$request->get('blockElementIndex');
-                $blockName = 'get' . ucfirst($blockName);
-                $block = $object->$blockName()[$blockElementIndex];
+                $block = $object->get($block)[$blockElementIndex];
 
                 /** @var DataObject\Localizedfield $localizedfield */
                 $localizedfield = $block['localizedfields']->getData();
-                $data = $localizedfield->getLocalizedValue($fieldName, $lang) ?: $localizedfield->getLocalizedValue($fieldName, $this->sourceLanguage);
+                $data = $localizedfield->getLocalizedValue($field, $lang) ?:
+                    $localizedfield->getLocalizedValue($field, $this->sourceLanguage);
+            } else if($objectBrick) {
+                $objectBrickField = $request->get('objectBrickField');
+
+                /** @var DataObject\Objectbrick $objectBrick */
+                $objectBrick = $object->get($field)->get($objectBrick);
+                $data = $objectBrick->get($objectBrickField, $lang) ?:
+                    $objectBrick->get($objectBrickField, $this->sourceLanguage);
             } else {
-                $fieldName = 'get' . ucfirst($fieldName);
-                $data = $object->$fieldName($lang) ?: $object->$fieldName($this->sourceLanguage);
+                $data = $object->get($field, $lang) ?: $object->get($field, $this->sourceLanguage);
             }
 
             $provider = $providerFactory->get($this->provider);
