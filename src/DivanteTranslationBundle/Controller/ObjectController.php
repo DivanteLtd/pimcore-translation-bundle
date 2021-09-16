@@ -35,28 +35,53 @@ final class ObjectController extends AdminController
      */
     public function translateFieldAction(Request $request, ProviderFactory $providerFactory): JsonResponse
     {
+        $result = '';
         try {
             $object = DataObject::getById($request->get('sourceId'));
-
             $lang = $request->get('lang');
-            $fieldName = 'get' . ucfirst($request->get('fieldName'));
+            $field = $request->get('fieldName');
+            $formality = $request->get('formality');
 
-            $data = $object->$fieldName($lang) ?: $object->$fieldName($this->sourceLanguage);
+            $block = $request->get('block');
+            $objectBrick = $request->get('objectBrick');
+            if ($block) {
+                $blockElementIndex = (int)$request->get('blockElementIndex');
+                if (!$blockElementIndex || $blockElementIndex == '') {
+                    throw new \Exception('Invalid request, "blockElementIndex" not secified');
+                }
 
-            if (!$data) {
-                return $this->adminJson([
-                    'success' => false,
-                    'message' => 'Data are empty',
-                ]);
+                $block = $object->get($block)[$blockElementIndex];
+
+                /** @var DataObject\Localizedfield $localizedfield */
+                $localizedfield = $block['localizedfields']->getData();
+                $data = $localizedfield->getLocalizedValue($field, $lang) ?:
+                    $localizedfield->getLocalizedValue($field, $this->sourceLanguage);
+            } else if($objectBrick) {
+                $objectBrickField = $request->get('objectBrickField');
+                if (!$objectBrickField || $objectBrickField == '') {
+                    throw new \Exception('Invalid request, "objectBrickField" not secified');
+                }
+
+                /** @var DataObject\Objectbrick $objectBrick */
+                $objectBrick = $object->get($field)->get($objectBrick);
+                $data = $objectBrick->get($objectBrickField, $lang) ?:
+                    $objectBrick->get($objectBrickField, $this->sourceLanguage);
+            } else {
+                $data = $object->get($field, $lang) ?: $object->get($field, $this->sourceLanguage);
+            }
+
+            if (!$data || $data == '') {
+                throw new \Exception("Data are empty!");
             }
 
             $provider = $providerFactory->get($this->provider);
-            if ($request->get('formality') && ($this->provider === 'deepl' || $this->provider === 'deepl_free')) {
-                $provider->setFormality($request->get('formality'));
+            if ($formality && ($this->provider === 'deepl' || $this->provider === 'deepl_free')) {
+                $provider->setFormality($formality);
             }
 
             $data = strip_tags($data);
-            $data = $provider->translate($data, $lang);
+            $result = $provider->translate($data, $lang);
+
         } catch (\Throwable $exception) {
             return $this->adminJson([
                 'success' => false,
@@ -66,7 +91,7 @@ final class ObjectController extends AdminController
 
         return $this->adminJson([
             'success' => true,
-            'data' => $data,
+            'data' => $result,
         ]);
     }
 }
