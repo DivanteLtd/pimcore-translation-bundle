@@ -35,7 +35,8 @@ pimcore.object.tags.wysiwyg = Class.create(pimcore.object.tags.wysiwyg, {
                 this.fieldConfig.name,
                 this,
                 'wysiwyg',
-                this.context.language
+                this.context.language,
+                this.context
             );
         } else {
             this.translateButton = {};

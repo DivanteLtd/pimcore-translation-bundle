@@ -54,7 +54,8 @@ pimcore.object.tags.input = Class.create(pimcore.object.tags.input, {
                 this.fieldConfig.name,
                 this.component,
                 'input',
-                this.context.language
+                this.context.language,
+                this.context
             );
         } else {
             this.translateButton = {};

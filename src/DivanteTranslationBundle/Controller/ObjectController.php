@@ -46,6 +46,10 @@ final class ObjectController extends AdminController
             $objectBrick = $request->get('objectBrick');
             if ($block) {
                 $blockElementIndex = (int)$request->get('blockElementIndex');
+                if (!$blockElementIndex || $blockElementIndex == '') {
+                    throw new \Exception('Invalid request, "blockElementIndex" not secified');
+                }
+
                 $block = $object->get($block)[$blockElementIndex];
 
                 /** @var DataObject\Localizedfield $localizedfield */
@@ -54,6 +58,9 @@ final class ObjectController extends AdminController
                     $localizedfield->getLocalizedValue($field, $this->sourceLanguage);
             } else if($objectBrick) {
                 $objectBrickField = $request->get('objectBrickField');
+                if (!$objectBrickField || $objectBrickField == '') {
+                    throw new \Exception('Invalid request, "objectBrickField" not secified');
+                }
 
                 /** @var DataObject\Objectbrick $objectBrick */
                 $objectBrick = $object->get($field)->get($objectBrick);

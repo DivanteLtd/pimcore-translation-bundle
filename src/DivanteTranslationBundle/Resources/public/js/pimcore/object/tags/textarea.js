@@ -76,7 +76,8 @@ pimcore.object.tags.textarea = Class.create(pimcore.object.tags.abstract, {
                 this.fieldConfig.name,
                 this,
                 'textarea',
-                this.context.language
+                this.context.language,
+                this.context
             );
         } else {
             this.translateButton = {};
