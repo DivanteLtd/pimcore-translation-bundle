@@ -47,7 +47,7 @@ pimcore.object.elementservice.translateButton = function (id, fieldName, compone
 };
 
 function handleTranslationRequest(id, fieldName, component, type, lang, formality, elementContext) {
-    console.log(elementContext);
+
     let params = {
         sourceId: id,
         fieldName: fieldName,

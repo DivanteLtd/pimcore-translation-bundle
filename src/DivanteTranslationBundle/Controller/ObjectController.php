@@ -70,6 +70,10 @@ final class ObjectController extends AdminController
                 $data = $object->get($field, $lang) ?: $object->get($field, $this->sourceLanguage);
             }
 
+            if (!$data || $data == '') {
+                throw new \Exception("Data are empty!");
+            }
+
             $provider = $providerFactory->get($this->provider);
             if ($formality && ($this->provider === 'deepl' || $this->provider === 'deepl_free')) {
                 $provider->setFormality($formality);
