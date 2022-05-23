@@ -55,7 +55,6 @@ final class ObjectController extends AdminController
                 $provider->setFormality($request->get('formality'));
             }
 
-            $data = strip_tags($data);
             $data = $provider->translate($data, $lang);
         } catch (\Throwable $exception) {
             return $this->adminJson([

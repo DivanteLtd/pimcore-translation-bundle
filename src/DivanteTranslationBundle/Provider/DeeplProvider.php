@@ -33,7 +33,7 @@ class DeeplProvider extends AbstractProvider implements FormalityProviderInterfa
                         'auth_key' => $this->apiKey,
                         'text' => $data,
                         'target_lang' => locale_get_primary_language($targetLanguage),
-                        'formality' => $this->formality
+                        'formality' => $this->formality,
                     ]
                 ]
             );
