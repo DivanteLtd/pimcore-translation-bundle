@@ -41,7 +41,7 @@ final class ObjectController extends AdminController
             $lang = $request->get('lang');
             $fieldName = 'get' . ucfirst($request->get('fieldName'));
 
-            $data = $object->$fieldName($lang) ?: $object->$fieldName($this->sourceLanguage);
+            $data = $object->$fieldName($this->sourceLanguage);
 
             if (!$data) {
                 return $this->adminJson([
