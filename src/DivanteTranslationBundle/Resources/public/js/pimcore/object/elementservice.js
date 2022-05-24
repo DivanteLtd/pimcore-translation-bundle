@@ -3,30 +3,20 @@ pimcore.registerNS("pimcore.object.elementservice.x");
 pimcore.object.elementservice.translateButton = function (id, fieldName, component, type, lang) {
     var provider = pimcore.globalmanager.get('translationBundle_provider');
 
-    if (provider === 'deepl' || provider === 'deepl_free') {
-        return new Ext.Button({
-            iconCls: "pimcore_icon_translations",
-            cls: 'pimcore_button_transparent',
-            tooltip: t("translate_field"),
-            handler: function () {
-                handleTranslationRequest(id, fieldName, component, type, lang, 'less')
-            }.bind(this),
-            style: "margin-left: 10px; filter:grayscale(100%);",
-        });
-    } else {
-        return new Ext.Button({
-            iconCls: "pimcore_icon_translations",
-            cls: 'pimcore_button_transparent',
-            tooltip: t("translate_field"),
-            handler: function () {
-                handleTranslationRequest(id, fieldName, component, type, lang, '')
-            }.bind(this),
-            style: "margin-left: 10px; filter:grayscale(100%);",
-        });
-    }
+    return new Ext.Button({
+        iconCls: "pimcore_icon_translations",
+        cls: 'pimcore_button_transparent',
+        tooltip: t("translate_field"),
+        handler: function () {
+            handleTranslationRequest(id, fieldName, component, type, lang)
+        }.bind(this),
+        style: "margin-left: 10px; filter:grayscale(100%);",
+    });
+
 };
 
 function handleTranslationRequest(id, fieldName, component, type, lang, formality) {
+    console.log(id, fieldName, component, type, lang, formality);
     Ext.Ajax.request({
         url: "/admin/object/translate-field",
         method: "GET",

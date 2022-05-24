@@ -52,7 +52,7 @@ final class ObjectController extends AdminController
 
             $provider = $providerFactory->get($this->provider);
             if ($request->get('formality') && ($this->provider === 'deepl' || $this->provider === 'deepl_free')) {
-                $provider->setFormality($request->get('formality'));
+               // $provider->setFormality($request->get('formality'));
             }
 
             $data = $provider->translate($data, $lang);
