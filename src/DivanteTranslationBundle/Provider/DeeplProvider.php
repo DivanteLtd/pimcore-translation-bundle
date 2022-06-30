@@ -22,8 +22,13 @@ class DeeplProvider extends AbstractProvider implements FormalityProviderInterfa
 
         return $this;
     }
+    public function setGlossaryId($glossaryId): self
+    {
+        $this->glossaryId = $glossaryId;
 
-    public function translate(string $data, string $targetLanguage, string|null $glossaryId): string
+        return $this;
+    }
+    public function translate(string $data, string $targetLanguage): string
     {
         try {
             $response = $this->getHttpClient()->request(
@@ -35,7 +40,7 @@ class DeeplProvider extends AbstractProvider implements FormalityProviderInterfa
                         'auth_key' => $this->apiKey,
                         'text' => $data,
                         'target_lang' => locale_get_primary_language($targetLanguage),
-                        'glossary_id' => $glossaryId,
+                        'glossary_id' => $this->glossaryId,
                         'tag_handling' => 'html'
                     ]
                 ]
