@@ -16,7 +16,6 @@ pimcore.object.elementservice.translateButton = function (id, fieldName, compone
 };
 
 function handleTranslationRequest(id, fieldName, component, type, lang, formality) {
-    console.log(id, fieldName, component, type, lang, formality);
     Ext.Ajax.request({
         url: "/admin/object/translate-field",
         method: "GET",

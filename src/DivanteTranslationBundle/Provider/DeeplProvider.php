@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Piotr Rugała <piotr@isedo.pl>
  * @copyright Copyright (c) 2021 Divante Ltd. (https://divante.co)
@@ -22,7 +23,7 @@ class DeeplProvider extends AbstractProvider implements FormalityProviderInterfa
         return $this;
     }
 
-    public function translate(string $data, string $targetLanguage): string
+    public function translate(string $data, string $targetLanguage, string|null $glossaryId): string
     {
         try {
             $response = $this->getHttpClient()->request(
@@ -30,10 +31,11 @@ class DeeplProvider extends AbstractProvider implements FormalityProviderInterfa
                 'v2/translate',
                 [
                     'query' => [
+                        'source_lang' => 'EN',
                         'auth_key' => $this->apiKey,
                         'text' => $data,
                         'target_lang' => locale_get_primary_language($targetLanguage),
-                        // 'formality' => $this->formality,
+                        'glossary_id' => $glossaryId,
                         'tag_handling' => 'html'
                     ]
                 ]
